@@ -1,0 +1,29 @@
+{
+  "name": "clazof",
+  "version": "0.0.0",
+  "description": "Functional instanceof.",
+  "main": "clazof.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/volkovasystems/clazof.git"
+  },
+  "keywords": [
+    "functional",
+    "instanceof",
+    "instance",
+    "class",
+    "clazof"
+  ],
+  "author": "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/volkovasystems/clazof/issues"
+  },
+  "homepage": "https://github.com/volkovasystems/clazof#readme",
+  "dependencies": {
+    "protype": "^0.4.0"
+  }
+}

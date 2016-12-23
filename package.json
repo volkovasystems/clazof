@@ -1,10 +1,13 @@
 {
   "name": "clazof",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Functional instanceof.",
   "main": "clazof.js",
+  "support": "clazof.support.js",
+  "deploy": "clazof.deploy.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel clazof.js -o clazof.support.js && webpack",
+    "test": "mocha clazof-test.js"
   },
   "repository": {
     "type": "git",
@@ -18,12 +21,23 @@
     "clazof"
   ],
   "author": "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
+  "contributors": [
+    "John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/volkovasystems/clazof/issues"
   },
   "homepage": "https://github.com/volkovasystems/clazof#readme",
   "dependencies": {
-    "protype": "^0.4.0"
+    "babel-runtime": "^6.20.0",
+    "protype": "^0.7.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-latest": "^6.16.0",
+    "webpack": "^1.14.0"
   }
 }

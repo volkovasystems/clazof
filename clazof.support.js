@@ -55,20 +55,20 @@
 	@end-include
 */
 
-const protype = require( "protype" );
+var protype = require("protype");
 
-const clazof = function clazof( entity, blueprint ){
+var clazof = function clazof(entity, blueprint) {
 	/*;
-		@meta-configuration:
-			{
-				"entity:required": "*",
-				"blueprint:required": "function"
-			}
-		@end-meta-configuration
-	*/
+ 	@meta-configuration:
+ 		{
+ 			"entity:required": "*",
+ 			"blueprint:required": "function"
+ 		}
+ 	@end-meta-configuration
+ */
 
-	if( !protype( blueprint, FUNCTION ) ){
-		throw new Error( "invalid blueprint" );
+	if (!protype(blueprint, FUNCTION)) {
+		throw new Error("invalid blueprint");
 	}
 
 	return entity instanceof blueprint;

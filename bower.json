@@ -1,6 +1,6 @@
 {
   "name": "clazof",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Functional instanceof.",
   "main": "clazof.js",
   "support": "clazof.support.js",
@@ -26,6 +26,7 @@
     "tests"
   ],
   "dependencies": {
-    "protype": "^0.7.0"
+    "een": "^0.1.0",
+    "protype": "^0.8.0"
   }
 }

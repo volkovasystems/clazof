@@ -5,7 +5,7 @@
 		The MIT License (MIT)
 		@mit-license
 
-		Copyright (@c) 2016 Richeve Siodina Bebedor
+		Copyright (@c) 2017 Richeve Siodina Bebedor
 		@email: richeve.bebedor@gmail.com
 
 		Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -46,16 +46,30 @@
 
 	@module-documentation:
 		Functional instanceof.
+
+		This will walk the inheritance tree.
 	@end-module-documentation
 
 	@include:
 		{
+			"een": "een",
 			"protype": "protype"
 		}
 	@end-include
 */
 
+const een = require( "een" );
 const protype = require( "protype" );
+
+//; @support-module:
+	//: @reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+	Array.prototype.some=Array.prototype.some||function(evaluator,thisArg){"use strict";
+	if(!this)throw new TypeError("Array.prototype.some called on null or undefined");
+	if("function"!=typeof evaluator){if("string"!=typeof evaluator)throw new TypeError;
+	if(!(evaluator=eval(evaluator)))throw new TypeError}var i;
+	if(void 0===thisArg){for(i in this)if(evaluator(this[i],i,this))return!0;return!1}
+	for(i in this)if(evaluator.call(thisArg,this[i],i,this))return!0;return!1};
+//; @end-support-module
 
 const clazof = function clazof( entity, blueprint ){
 	/*;
@@ -71,7 +85,46 @@ const clazof = function clazof( entity, blueprint ){
 		throw new Error( "invalid blueprint" );
 	}
 
-	return entity instanceof blueprint;
+	if( protype( entity, OBJECT ) ){
+		let result = entity instanceof blueprint;
+
+		/*;
+			@todo:
+				If we can separate this to another module that just walk the inheritance tree.
+			@end-todo
+		*/
+		if( !result ){
+			let constructor = [ ];
+			let point = entity;
+			while( een( constructor, point.constructor ) ){
+				constructor.push( point.constructor );
+				point = point.constructor.prototype;
+			}
+
+			result = constructor.some( function onEachConstructor( constructor ){
+				return clazof( constructor, blueprint );
+			} );
+		}
+
+		if( !result ){
+			let constructor = [ ];
+			let point = entity.constructor;
+			while( een( constructor, point.__proto__ ) ){
+				constructor.push( point.__proto__ );
+				point = point.__proto__;
+			}
+
+			result = constructor.some( function onEachConstructor( constructor ){
+				return clazof( constructor, blueprint );
+			} );
+		}
+
+		return result;
+
+	}else if( protype( entity, FUNCTION ) ){
+		entity.name === blueprint.name && entity.toString( ) === blueprint.toString( );
+	}
+
 };
 
 module.exports = clazof;

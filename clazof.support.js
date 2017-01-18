@@ -58,6 +58,7 @@
 	@end-include
 */
 
+var budge = require("budge");
 var een = require("een");
 var protype = require("protype");
 
@@ -91,6 +92,16 @@ var clazof = function clazof(entity, blueprint) {
  		}
  	@end-meta-configuration
  */
+
+	if (arguments.length > 2) {
+		blueprint = budge(arguments).filter(function (blueprint) {
+			return protype(blueprint, FUNCTION);
+		});
+
+		return blueprint.some(function (blueprint) {
+			return clazof(entity, blueprint);
+		});
+	}
 
 	if (!protype(blueprint, FUNCTION)) {
 		throw new Error("invalid blueprint");

@@ -52,7 +52,9 @@
 
 	@include:
 		{
+			"budge": "budge",
 			"een": "een",
+			"falzy": "falzy",
 			"protype": "protype"
 		}
 	@end-include
@@ -60,6 +62,7 @@
 
 const budge = require( "budge" );
 const een = require( "een" );
+const falzy = require( "falzy" );
 const protype = require( "protype" );
 
 //; @support-module:
@@ -76,7 +79,7 @@ const clazof = function clazof( entity, blueprint ){
 	/*;
 		@meta-configuration:
 			{
-				"entity:required": "*",
+				"entity:required": "object",
 				"blueprint:required": "function"
 			}
 		@end-meta-configuration
@@ -91,6 +94,10 @@ const clazof = function clazof( entity, blueprint ){
 
 	if( !protype( blueprint, FUNCTION ) ){
 		throw new Error( "invalid blueprint" );
+	}
+
+	if( falzy( entity ) ){
+		return false;
 	}
 
 	if( protype( entity, OBJECT ) ){

@@ -1,9 +1,20 @@
-var webpack = require( "webpack" );
+const webpack = require( "webpack" );
+const ResolverPlugin = webpack.ResolverPlugin;
+const DirectoryDescriptionFilePlugin = ResolverPlugin.DirectoryDescriptionFilePlugin;
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 module.exports = {
 	"entry": "./clazof.support.js",
 	"resolve": {
 		"modulesDirectories": [ "bower_components", "node_modules" ]
+	},
+	"module": {
+		"preLoaders": [
+			{
+				"test": /\.support\.js$/,
+				"loader": "source-map-loader"
+			}
+		]
 	},
 	"output": {
 		"library": "clazof",
@@ -11,8 +22,18 @@ module.exports = {
 		"filename": "clazof.deploy.js"
 	},
 	"plugins": [
-		new webpack.ResolverPlugin( new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin( "bower.json", [ "support" ] ) ),
-		new webpack.ResolverPlugin( new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin( ".bower.json", [ "main" ] ) ),
-		new webpack.optimize.UglifyJsPlugin( { compress: { warnings: false } } )
-	]
+		new ResolverPlugin( new DirectoryDescriptionFilePlugin( "bower.json", [ "support" ] ) ),
+		new ResolverPlugin( new DirectoryDescriptionFilePlugin( ".bower.json", [ "main" ] ) ),
+		new UglifyJsPlugin( {
+			"compress": {
+				"keep_fargs": true,
+				"keep_fnames": true,
+				"warnings": false
+			},
+			"comments": false,
+			"sourceMap": true,
+			"mangle": false
+		} )
+	],
+	"devtool": "#inline-source-map"
 };

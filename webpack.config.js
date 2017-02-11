@@ -48,5 +48,5 @@ module.exports = {
 				"mangle": false
 		} )
 	],
-	"devtool": "#inline-source-map"
+	"devtool": "#cheap-module-inline-source-map"
 };

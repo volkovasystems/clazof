@@ -897,6 +897,10 @@ cipher-base@^1.0.0, cipher-base@^1.0.1:
   dependencies:
     inherits "^2.0.1"
 
+circular-json@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.1.tgz#be8b36aefccde8b3ca7aa2d6afc07a37242c0d2d"
+
 clazof@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/clazof/-/clazof-0.4.0.tgz#d70192b2ce345f66cf4d1c6a145428cd1298fc9b"
@@ -1139,6 +1143,18 @@ doubt@^0.10.0:
     harden "^0.14.0"
     protype "^0.11.0"
 
+doubt@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/doubt/-/doubt-0.14.0.tgz#0196e55ab36ebd6c855812551b9188a5debeaecc"
+  dependencies:
+    babel-runtime "^6.22.0"
+    cemento "^0.8.0"
+    circular-json "^0.3.1"
+    falzy "^0.11.0"
+    harden "^0.14.0"
+    kount "^0.7.0"
+    protype "^0.15.0"
+
 doubt@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/doubt/-/doubt-0.6.0.tgz#c5f15725443d00a8aa91694f9dce8d2021c9f0c1"
@@ -1164,15 +1180,15 @@ een@^0.1.0:
     protype "^0.8.0"
     truly "^0.5.0"
 
-een@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/een/-/een-0.3.0.tgz#5351f052e39549f4d916cf35627cefc024e681fb"
+een@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/een/-/een-0.4.0.tgz#b275e394f8a31c5c4d5fcec77f194dfc7cf5ee01"
   dependencies:
     babel-runtime "^6.22.0"
-    doubt "^0.10.0"
-    kein "^0.8.0"
-    protype "^0.11.0"
-    truly "^0.9.0"
+    doubt "^0.14.0"
+    kein "^0.9.0"
+    protype "^0.15.0"
+    truly "^0.11.0"
 
 elliptic@^6.0.0:
   version "6.3.3"
@@ -1766,13 +1782,13 @@ kein@^0.2.0:
     falzy "^0.7.0"
     protype "^0.8.0"
 
-kein@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/kein/-/kein-0.8.0.tgz#03034ffe2a8a9f6a38f225d25e809b5b5ab3fa7b"
+kein@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/kein/-/kein-0.9.0.tgz#302b0275f05358b057115422f53cc14a145ef141"
   dependencies:
     babel-runtime "^6.22.0"
-    falzy "^0.10.0"
-    protype "^0.11.0"
+    falzy "^0.11.0"
+    protype "^0.15.0"
 
 kind-of@^3.0.2:
   version "3.1.0"
@@ -1789,6 +1805,12 @@ kount@^0.4.0:
 kount@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/kount/-/kount-0.6.0.tgz#5fe085c573adf8983ccc236a61ab1791f21c0579"
+  dependencies:
+    babel-runtime "^6.22.0"
+
+kount@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/kount/-/kount-0.7.0.tgz#ffcf367ef7cd68f6e37034b61d5569d4af5bcdd9"
   dependencies:
     babel-runtime "^6.22.0"
 
@@ -2630,6 +2652,13 @@ tough-cookie@~2.3.0:
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.2.tgz#f081f76e4c85720e6c37a5faced737150d84072a"
   dependencies:
     punycode "^1.4.1"
+
+truly@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/truly/-/truly-0.11.0.tgz#7465f07bbf0ffec1566458fdc71f37cf3ec54170"
+  dependencies:
+    babel-runtime "^6.22.0"
+    protype "^0.15.0"
 
 truly@^0.5.0:
   version "0.5.0"

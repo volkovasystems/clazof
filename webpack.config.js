@@ -7,12 +7,12 @@ module.exports = {
 	"entry": "./clazof.support.js",
 	"resolve": {
 			"descriptionFiles": [
-				"bower.json",
-				"package.json"
+				"package.json",
+				"bower.json"
 			],
 			"modules": [
-				"bower_components",
-				"node_modules"
+				"node_modules",
+				"bower_components"
 			],
 			"mainFields": [
 				"support",

@@ -65,16 +65,6 @@ const een = require( "een" );
 const falzy = require( "falzy" );
 const protype = require( "protype" );
 
-//; @support-module:
-	//: @reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
-	Array.prototype.some=Array.prototype.some||function(evaluator,thisArg){"use strict";
-	if(!this)throw new TypeError("Array.prototype.some called on null or undefined");
-	if("function"!=typeof evaluator){if("string"!=typeof evaluator)throw new TypeError;
-	if(!(evaluator=eval(evaluator)))throw new TypeError}var i;
-	if(void 0===thisArg){for(i in this)if(evaluator(this[i],i,this))return!0;return!1}
-	for(i in this)if(evaluator.call(thisArg,this[i],i,this))return!0;return!1};
-//; @end-support-module
-
 const clazof = function clazof( entity, blueprint ){
 	/*;
 		@meta-configuration:
@@ -96,7 +86,7 @@ const clazof = function clazof( entity, blueprint ){
 		throw new Error( "invalid blueprint" );
 	}
 
-	if( falzy( entity ) ){
+	if( falzy( entity ) || !protype( entity, OBJECT + FUNCTION ) ){
 		return false;
 	}
 
@@ -116,7 +106,7 @@ const clazof = function clazof( entity, blueprint ){
 				point = point.constructor.prototype;
 			}
 
-			result = constructor.some( function onEachConstructor( constructor ){
+			result = constructor.some( ( constructor ) => {
 				return clazof( constructor, blueprint );
 			} );
 		}
@@ -129,17 +119,19 @@ const clazof = function clazof( entity, blueprint ){
 				point = point.__proto__;
 			}
 
-			result = constructor.some( function onEachConstructor( constructor ){
+			result = constructor.some( ( constructor ) => {
 				return clazof( constructor, blueprint );
 			} );
 		}
 
 		return result;
-
-	}else if( protype( entity, FUNCTION ) ){
-		entity.name === blueprint.name && entity.toString( ) === blueprint.toString( );
 	}
 
+	if( protype( entity, FUNCTION ) ){
+		return ( entity.name === blueprint.name &&
+				entity.toString( ) === blueprint.toString( ) ) ||
+			clazof( entity.prototype, blueprint );
+	}
 };
 
 module.exports = clazof;

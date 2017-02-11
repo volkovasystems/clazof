@@ -24,5 +24,9 @@
     "tests"
   ],
   "dependencies": {
+    "budge": "^0.6.0",
+    "een": "^0.3.0",
+    "falzy": "^0.11.0",
+    "protype": "^0.15.0"
   }
 }

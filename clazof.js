@@ -125,11 +125,12 @@ const clazof = function clazof( entity, blueprint ){
 		}
 
 		return result;
-
 	}
 
 	if( protype( entity, FUNCTION ) ){
-		return entity.name === blueprint.name && entity.toString( ) === blueprint.toString( );
+		return ( entity.name === blueprint.name &&
+				entity.toString( ) === blueprint.toString( ) ) ||
+			clazof( entity.prototype, blueprint );
 	}
 };
 

@@ -810,6 +810,15 @@ budge@^0.8.0:
     doubt "^0.14.0"
     raze "^0.16.0"
 
+budge@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/budge/-/budge-0.9.0.tgz#d9a3b47b54de9fd3ca3fd06f3902bb43efb71abe"
+  dependencies:
+    babel-runtime "^6.22.0"
+    depher "^0.10.0"
+    doubt "^0.14.0"
+    raze "^0.16.0"
+
 buffer-shims@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/buffer-shims/-/buffer-shims-1.0.0.tgz#9978ce317388c649ad8793028c3477ef044a8b51"
@@ -918,6 +927,16 @@ clazof@^0.4.0:
     een "^0.1.0"
     falzy "^0.7.0"
     protype "^0.8.0"
+
+clazof@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/clazof/-/clazof-0.8.0.tgz#097edbfc26c773ddfbff9fdefbae322e7dabffc7"
+  dependencies:
+    babel-runtime "^6.22.0"
+    budge "^0.8.0"
+    een "^0.4.0"
+    falzy "^0.11.0"
+    protype "^0.15.0"
 
 cliui@^2.1.0:
   version "2.1.0"
@@ -1091,6 +1110,31 @@ dephall@^0.8.0:
     falzy "^0.10.0"
     harden "^0.14.0"
     pyck "^0.8.0"
+    zelf "^0.6.0"
+
+dephall@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/dephall/-/dephall-0.9.0.tgz#5e692ba838c0079e3d588474fc4fd16d5e4dc90a"
+  dependencies:
+    arid "^0.12.0"
+    babel-runtime "^6.22.0"
+    doubt "^0.14.0"
+    falze "^0.8.0"
+    falzy "^0.11.0"
+    harden "^0.14.0"
+    pyck "^0.10.0"
+    zelf "^0.6.0"
+
+depher@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/depher/-/depher-0.10.0.tgz#821a2a28db60e349d8a45343b3c3c644e0669490"
+  dependencies:
+    babel-runtime "^6.22.0"
+    dephall "^0.9.0"
+    doubt "^0.14.0"
+    falze "^0.8.0"
+    falzy "^0.11.0"
+    harden "^0.14.0"
     zelf "^0.6.0"
 
 depher@^0.5.0:
@@ -1388,6 +1432,15 @@ filled@^0.6.0:
     doubt "^0.10.0"
     raze "^0.12.0"
     truly "^0.9.0"
+
+filled@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/filled/-/filled-0.8.0.tgz#aeb062866c9ce8b4218983357eebe4a372dcb57c"
+  dependencies:
+    babel-runtime "^6.22.0"
+    doubt "^0.14.0"
+    raze "^0.16.0"
+    truly "^0.11.0"
 
 find-up@^1.0.0:
   version "1.1.2"
@@ -2235,6 +2288,21 @@ punycode@^1.2.4, punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
+pyck@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/pyck/-/pyck-0.10.0.tgz#11d9e792ec2a99bb66587a19c14426df652c04c0"
+  dependencies:
+    babel-runtime "^6.22.0"
+    clazof "^0.8.0"
+    doubt "^0.14.0"
+    falze "^0.8.0"
+    falzy "^0.11.0"
+    harden "^0.14.0"
+    protype "^0.15.0"
+    raze "^0.16.0"
+    truu "^0.9.0"
+    zelf "^0.6.0"
+
 pyck@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/pyck/-/pyck-0.5.0.tgz#cf379858a3756179d479cd3dade7096b856c906f"
@@ -2634,6 +2702,16 @@ stuffed@^0.4.0:
     protype "^0.11.0"
     truly "^0.9.0"
 
+stuffed@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/stuffed/-/stuffed-0.9.0.tgz#46a9e213878bf68057fa9fb9bb26716a0dd3256f"
+  dependencies:
+    babel-runtime "^6.22.0"
+    doubt "^0.14.0"
+    kount "^0.7.0"
+    protype "^0.15.0"
+    truly "^0.11.0"
+
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
@@ -2731,6 +2809,17 @@ truu@^0.7.0:
     protype "^0.11.0"
     stuffed "^0.4.0"
     truly "^0.9.0"
+
+truu@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/truu/-/truu-0.9.0.tgz#09b1250a18a222e15fc1787f73bf177bc81f73a7"
+  dependencies:
+    babel-runtime "^6.22.0"
+    doubt "^0.14.0"
+    filled "^0.8.0"
+    protype "^0.15.0"
+    stuffed "^0.9.0"
+    truly "^0.11.0"
 
 tty-browserify@0.0.0:
   version "0.0.0"

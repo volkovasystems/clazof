@@ -48,41 +48,51 @@
 		Functional instanceof.
 
 		This will walk the inheritance tree.
+
+		Multiple blueprint is strictly evaluated, so if one of them is falsy
+			then this will return false.
 	@end-module-documentation
 
 	@include:
 		{
-			"budge": "budge",
-			"een": "een",
 			"falzy": "falzy",
-			"protype": "protype"
+			"protype": "protype",
+			"raze": "raze",
+			'wauker': "wauker"
 		}
 	@end-include
 */
 
-const budge = require( "budge" );
-const een = require( "een" );
 const falzy = require( "falzy" );
 const protype = require( "protype" );
+const raze = require( "raze" );
+const wauker = require( "wauker" );
 
 const clazof = function clazof( entity, blueprint ){
 	/*;
 		@meta-configuration:
 			{
-				"entity:required": "object",
-				"blueprint:required": "function"
+				"entity:required": [
+					"object",
+					"function"
+				],
+				"blueprint:required": [
+					"function",
+					"string",
+					"..."
+				]
 			}
 		@end-meta-configuration
 	*/
 
 	if( arguments.length > 2 ){
-		blueprint = budge( arguments )
-			.filter( ( blueprint ) => { return protype( blueprint, FUNCTION ); } );
+		blueprint = raze( arguments ).splice( 1 )
+			.filter( ( blueprint ) => { return protype( blueprint, FUNCTION + STRING ); } );
 
-		return blueprint.some( ( blueprint ) => { return clazof( entity, blueprint ); } );
+		return blueprint.every( ( blueprint ) => { return clazof( entity, blueprint ); } );
 	}
 
-	if( !protype( blueprint, FUNCTION ) ){
+	if( !protype( blueprint, FUNCTION + STRING ) ){
 		throw new Error( "invalid blueprint" );
 	}
 
@@ -90,41 +100,17 @@ const clazof = function clazof( entity, blueprint ){
 		return false;
 	}
 
+	if( protype( blueprint, STRING ) ){
+		return wauker( entity ).some( ( constructor ) => {
+			return constructor.name === blueprint;
+		} );
+	}
+
 	if( protype( entity, OBJECT ) ){
-		let result = entity instanceof blueprint;
-
-		/*;
-			@todo:
-				If we can separate this to another module that just walk the inheritance tree.
-			@end-todo
-		*/
-		if( !result ){
-			let constructor = [ ];
-			let point = entity;
-			while( een( constructor, point.constructor ) ){
-				constructor.push( point.constructor );
-				point = point.constructor.prototype;
-			}
-
-			result = constructor.some( ( constructor ) => {
+	 	return ( entity instanceof blueprint ) ||
+			wauker( entity ).some( ( constructor ) => {
 				return clazof( constructor, blueprint );
 			} );
-		}
-
-		if( !result ){
-			let constructor = [ ];
-			let point = entity.constructor;
-			while( een( constructor, point.__proto__ ) ){
-				constructor.push( point.__proto__ );
-				point = point.__proto__;
-			}
-
-			result = constructor.some( ( constructor ) => {
-				return clazof( constructor, blueprint );
-			} );
-		}
-
-		return result;
 	}
 
 	if( protype( entity, FUNCTION ) ){
@@ -132,6 +118,8 @@ const clazof = function clazof( entity, blueprint ){
 				entity.toString( ) === blueprint.toString( ) ) ||
 			clazof( entity.prototype, blueprint );
 	}
+
+	return false;
 };
 
 module.exports = clazof;

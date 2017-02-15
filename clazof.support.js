@@ -1,91 +1,98 @@
 "use strict";
 
 /*;
-	@module-license:
-		The MIT License (MIT)
-		@mit-license
+              	@module-license:
+              		The MIT License (MIT)
+              		@mit-license
+              
+              		Copyright (@c) 2017 Richeve Siodina Bebedor
+              		@email: richeve.bebedor@gmail.com
+              
+              		Permission is hereby granted, free of charge, to any person obtaining a copy
+              		of this software and associated documentation files (the "Software"), to deal
+              		in the Software without restriction, including without limitation the rights
+              		to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+              		copies of the Software, and to permit persons to whom the Software is
+              		furnished to do so, subject to the following conditions:
+              
+              		The above copyright notice and this permission notice shall be included in all
+              		copies or substantial portions of the Software.
+              
+              		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+              		IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+              		FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+              		AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+              		LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+              		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+              		SOFTWARE.
+              	@end-module-license
+              
+              	@module-configuration:
+              		{
+              			"package": "clazof",
+              			"path": "clazof/clazof.js",
+              			"file": "clazof.js",
+              			"module": "clazof",
+              			"author": "Richeve S. Bebedor",
+              			"contributors": [
+              				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+              			],
+              			"eMail": "richeve.bebedor@gmail.com",
+              			"repository": "https://github.com/volkovasystems/clazof.git",
+              			"test": "clazof-test.js",
+              			"global": true
+              		}
+              	@end-module-configuration
+              
+              	@module-documentation:
+              		Functional instanceof.
+              
+              		This will walk the inheritance tree.
+              
+              		Multiple blueprint is strictly evaluated, so if one of them is falsy
+              			then this will return false.
+              	@end-module-documentation
+              
+              	@include:
+              		{
+              			"falzy": "falzy",
+              			"protype": "protype",
+              			"raze": "raze",
+              			'wauker': "wauker"
+              		}
+              	@end-include
+              */
 
-		Copyright (@c) 2017 Richeve Siodina Bebedor
-		@email: richeve.bebedor@gmail.com
-
-		Permission is hereby granted, free of charge, to any person obtaining a copy
-		of this software and associated documentation files (the "Software"), to deal
-		in the Software without restriction, including without limitation the rights
-		to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-		copies of the Software, and to permit persons to whom the Software is
-		furnished to do so, subject to the following conditions:
-
-		The above copyright notice and this permission notice shall be included in all
-		copies or substantial portions of the Software.
-
-		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-		IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-		FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-		AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-		LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-		SOFTWARE.
-	@end-module-license
-
-	@module-configuration:
-		{
-			"package": "clazof",
-			"path": "clazof/clazof.js",
-			"file": "clazof.js",
-			"module": "clazof",
-			"author": "Richeve S. Bebedor",
-			"contributors": [
-				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
-			],
-			"eMail": "richeve.bebedor@gmail.com",
-			"repository": "https://github.com/volkovasystems/clazof.git",
-			"test": "clazof-test.js",
-			"global": true
-		}
-	@end-module-configuration
-
-	@module-documentation:
-		Functional instanceof.
-
-		This will walk the inheritance tree.
-	@end-module-documentation
-
-	@include:
-		{
-			"budge": "budge",
-			"een": "een",
-			"falzy": "falzy",
-			"protype": "protype"
-		}
-	@end-include
-*/
-
-var budge = require("budge");
-var een = require("een");
 var falzy = require("falzy");
 var protype = require("protype");
+var raze = require("raze");
+var wauker = require("wauker");
 
 var clazof = function clazof(entity, blueprint) {
 	/*;
- 	@meta-configuration:
- 		{
- 			"entity:required": "object",
- 			"blueprint:required": "function"
- 		}
- 	@end-meta-configuration
- */
+                                                 	@meta-configuration:
+                                                 		{
+                                                 			"entity:required": [
+                                                 				"object",
+                                                 				"function"
+                                                 			],
+                                                 			"blueprint:required": [
+                                                 				"function",
+                                                 				"string",
+                                                 				"..."
+                                                 			]
+                                                 		}
+                                                 	@end-meta-configuration
+                                                 */
 
 	if (arguments.length > 2) {
-		blueprint = budge(arguments).filter(function (blueprint) {
-			return protype(blueprint, FUNCTION);
-		});
+		blueprint = raze(arguments).splice(1).
+		filter(function (blueprint) {return protype(blueprint, FUNCTION + STRING);});
 
-		return blueprint.some(function (blueprint) {
-			return clazof(entity, blueprint);
-		});
+		return blueprint.every(function (blueprint) {return clazof(entity, blueprint);});
 	}
 
-	if (!protype(blueprint, FUNCTION)) {
+	if (!protype(blueprint, FUNCTION + STRING)) {
 		throw new Error("invalid blueprint");
 	}
 
@@ -93,47 +100,28 @@ var clazof = function clazof(entity, blueprint) {
 		return false;
 	}
 
+	if (protype(blueprint, STRING)) {
+		return wauker(entity).some(function (constructor) {
+			return constructor.name === blueprint;
+		});
+	}
+
 	if (protype(entity, OBJECT)) {
-		var result = entity instanceof blueprint;
-
-		/*;
-  	@todo:
-  		If we can separate this to another module that just walk the inheritance tree.
-  	@end-todo
-  */
-		if (!result) {
-			var _constructor = [];
-			var point = entity;
-			while (een(_constructor, point.constructor)) {
-				_constructor.push(point.constructor);
-				point = point.constructor.prototype;
-			}
-
-			result = _constructor.some(function (constructor) {
-				return clazof(constructor, blueprint);
-			});
-		}
-
-		if (!result) {
-			var _constructor2 = [];
-			var _point = entity.constructor;
-			while (een(_constructor2, _point.__proto__)) {
-				_constructor2.push(_point.__proto__);
-				_point = _point.__proto__;
-			}
-
-			result = _constructor2.some(function (constructor) {
-				return clazof(constructor, blueprint);
-			});
-		}
-
-		return result;
+		return entity instanceof blueprint ||
+		wauker(entity).some(function (constructor) {
+			return clazof(constructor, blueprint);
+		});
 	}
 
 	if (protype(entity, FUNCTION)) {
-		return entity.name === blueprint.name && entity.toString() === blueprint.toString() || clazof(entity.prototype, blueprint);
+		return entity.name === blueprint.name &&
+		entity.toString() === blueprint.toString() ||
+		clazof(entity.prototype, blueprint);
 	}
+
+	return false;
 };
 
 module.exports = clazof;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNsYXpvZi5qcyJdLCJuYW1lcyI6WyJidWRnZSIsInJlcXVpcmUiLCJlZW4iLCJmYWx6eSIsInByb3R5cGUiLCJjbGF6b2YiLCJlbnRpdHkiLCJibHVlcHJpbnQiLCJhcmd1bWVudHMiLCJsZW5ndGgiLCJmaWx0ZXIiLCJGVU5DVElPTiIsInNvbWUiLCJFcnJvciIsIk9CSkVDVCIsInJlc3VsdCIsImNvbnN0cnVjdG9yIiwicG9pbnQiLCJwdXNoIiwicHJvdG90eXBlIiwiX19wcm90b19fIiwibmFtZSIsInRvU3RyaW5nIiwibW9kdWxlIiwiZXhwb3J0cyJdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQTREQSxJQUFNQSxRQUFRQyxRQUFTLE9BQVQsQ0FBZDtBQUNBLElBQU1DLE1BQU1ELFFBQVMsS0FBVCxDQUFaO0FBQ0EsSUFBTUUsUUFBUUYsUUFBUyxPQUFULENBQWQ7QUFDQSxJQUFNRyxVQUFVSCxRQUFTLFNBQVQsQ0FBaEI7O0FBRUEsSUFBTUksU0FBUyxTQUFTQSxNQUFULENBQWlCQyxNQUFqQixFQUF5QkMsU0FBekIsRUFBb0M7QUFDbEQ7Ozs7Ozs7OztBQVNBLEtBQUlDLFVBQVVDLE1BQVYsR0FBbUIsQ0FBdkIsRUFBMEI7QUFDekJGLGNBQVlQLE1BQU9RLFNBQVAsRUFDVkUsTUFEVSxDQUNGLFVBQUVILFNBQUYsRUFBaUI7QUFBRSxVQUFPSCxRQUFTRyxTQUFULEVBQW9CSSxRQUFwQixDQUFQO0FBQXdDLEdBRHpELENBQVo7O0FBR0EsU0FBT0osVUFBVUssSUFBVixDQUFnQixVQUFFTCxTQUFGLEVBQWlCO0FBQUUsVUFBT0YsT0FBUUMsTUFBUixFQUFnQkMsU0FBaEIsQ0FBUDtBQUFxQyxHQUF4RSxDQUFQO0FBQ0E7O0FBRUQsS0FBSSxDQUFDSCxRQUFTRyxTQUFULEVBQW9CSSxRQUFwQixDQUFMLEVBQXFDO0FBQ3BDLFFBQU0sSUFBSUUsS0FBSixDQUFXLG1CQUFYLENBQU47QUFDQTs7QUFFRCxLQUFJVixNQUFPRyxNQUFQLEtBQW1CLENBQUNGLFFBQVNFLE1BQVQsRUFBaUJRLFNBQVNILFFBQTFCLENBQXhCLEVBQThEO0FBQzdELFNBQU8sS0FBUDtBQUNBOztBQUVELEtBQUlQLFFBQVNFLE1BQVQsRUFBaUJRLE1BQWpCLENBQUosRUFBK0I7QUFDOUIsTUFBSUMsU0FBU1Qsa0JBQWtCQyxTQUEvQjs7QUFFQTs7Ozs7QUFLQSxNQUFJLENBQUNRLE1BQUwsRUFBYTtBQUNaLE9BQUlDLGVBQWMsRUFBbEI7QUFDQSxPQUFJQyxRQUFRWCxNQUFaO0FBQ0EsVUFBT0osSUFBS2MsWUFBTCxFQUFrQkMsTUFBTUQsV0FBeEIsQ0FBUCxFQUE4QztBQUM3Q0EsaUJBQVlFLElBQVosQ0FBa0JELE1BQU1ELFdBQXhCO0FBQ0FDLFlBQVFBLE1BQU1ELFdBQU4sQ0FBa0JHLFNBQTFCO0FBQ0E7O0FBRURKLFlBQVNDLGFBQVlKLElBQVosQ0FBa0IsVUFBRUksV0FBRixFQUFtQjtBQUM3QyxXQUFPWCxPQUFRVyxXQUFSLEVBQXFCVCxTQUFyQixDQUFQO0FBQ0EsSUFGUSxDQUFUO0FBR0E7O0FBRUQsTUFBSSxDQUFDUSxNQUFMLEVBQWE7QUFDWixPQUFJQyxnQkFBYyxFQUFsQjtBQUNBLE9BQUlDLFNBQVFYLE9BQU9VLFdBQW5CO0FBQ0EsVUFBT2QsSUFBS2MsYUFBTCxFQUFrQkMsT0FBTUcsU0FBeEIsQ0FBUCxFQUE0QztBQUMzQ0osa0JBQVlFLElBQVosQ0FBa0JELE9BQU1HLFNBQXhCO0FBQ0FILGFBQVFBLE9BQU1HLFNBQWQ7QUFDQTs7QUFFREwsWUFBU0MsY0FBWUosSUFBWixDQUFrQixVQUFFSSxXQUFGLEVBQW1CO0FBQzdDLFdBQU9YLE9BQVFXLFdBQVIsRUFBcUJULFNBQXJCLENBQVA7QUFDQSxJQUZRLENBQVQ7QUFHQTs7QUFFRCxTQUFPUSxNQUFQO0FBQ0E7O0FBRUQsS0FBSVgsUUFBU0UsTUFBVCxFQUFpQkssUUFBakIsQ0FBSixFQUFpQztBQUNoQyxTQUFTTCxPQUFPZSxJQUFQLEtBQWdCZCxVQUFVYyxJQUExQixJQUNQZixPQUFPZ0IsUUFBUCxPQUF1QmYsVUFBVWUsUUFBVixFQURsQixJQUVOakIsT0FBUUMsT0FBT2EsU0FBZixFQUEwQlosU0FBMUIsQ0FGRDtBQUdBO0FBQ0QsQ0FuRUQ7O0FBcUVBZ0IsT0FBT0MsT0FBUCxHQUFpQm5CLE1BQWpCIiwiZmlsZSI6ImNsYXpvZi5qcyIsInNvdXJjZXNDb250ZW50IjpbIlwidXNlIHN0cmljdFwiO1xuXG4vKjtcblx0QG1vZHVsZS1saWNlbnNlOlxuXHRcdFRoZSBNSVQgTGljZW5zZSAoTUlUKVxuXHRcdEBtaXQtbGljZW5zZVxuXG5cdFx0Q29weXJpZ2h0IChAYykgMjAxNyBSaWNoZXZlIFNpb2RpbmEgQmViZWRvclxuXHRcdEBlbWFpbDogcmljaGV2ZS5iZWJlZG9yQGdtYWlsLmNvbVxuXG5cdFx0UGVybWlzc2lvbiBpcyBoZXJlYnkgZ3JhbnRlZCwgZnJlZSBvZiBjaGFyZ2UsIHRvIGFueSBwZXJzb24gb2J0YWluaW5nIGEgY29weVxuXHRcdG9mIHRoaXMgc29mdHdhcmUgYW5kIGFzc29jaWF0ZWQgZG9jdW1lbnRhdGlvbiBmaWxlcyAodGhlIFwiU29mdHdhcmVcIiksIHRvIGRlYWxcblx0XHRpbiB0aGUgU29mdHdhcmUgd2l0aG91dCByZXN0cmljdGlvbiwgaW5jbHVkaW5nIHdpdGhvdXQgbGltaXRhdGlvbiB0aGUgcmlnaHRzXG5cdFx0dG8gdXNlLCBjb3B5LCBtb2RpZnksIG1lcmdlLCBwdWJsaXNoLCBkaXN0cmlidXRlLCBzdWJsaWNlbnNlLCBhbmQvb3Igc2VsbFxuXHRcdGNvcGllcyBvZiB0aGUgU29mdHdhcmUsIGFuZCB0byBwZXJtaXQgcGVyc29ucyB0byB3aG9tIHRoZSBTb2Z0d2FyZSBpc1xuXHRcdGZ1cm5pc2hlZCB0byBkbyBzbywgc3ViamVjdCB0byB0aGUgZm9sbG93aW5nIGNvbmRpdGlvbnM6XG5cblx0XHRUaGUgYWJvdmUgY29weXJpZ2h0IG5vdGljZSBhbmQgdGhpcyBwZXJtaXNzaW9uIG5vdGljZSBzaGFsbCBiZSBpbmNsdWRlZCBpbiBhbGxcblx0XHRjb3BpZXMgb3Igc3Vic3RhbnRpYWwgcG9ydGlvbnMgb2YgdGhlIFNvZnR3YXJlLlxuXG5cdFx0VEhFIFNPRlRXQVJFIElTIFBST1ZJREVEIFwiQVMgSVNcIiwgV0lUSE9VVCBXQVJSQU5UWSBPRiBBTlkgS0lORCwgRVhQUkVTUyBPUlxuXHRcdElNUExJRUQsIElOQ0xVRElORyBCVVQgTk9UIExJTUlURUQgVE8gVEhFIFdBUlJBTlRJRVMgT0YgTUVSQ0hBTlRBQklMSVRZLFxuXHRcdEZJVE5FU1MgRk9SIEEgUEFSVElDVUxBUiBQVVJQT1NFIEFORCBOT05JTkZSSU5HRU1FTlQuIElOIE5PIEVWRU5UIFNIQUxMIFRIRVxuXHRcdEFVVEhPUlMgT1IgQ09QWVJJR0hUIEhPTERFUlMgQkUgTElBQkxFIEZPUiBBTlkgQ0xBSU0sIERBTUFHRVMgT1IgT1RIRVJcblx0XHRMSUFCSUxJVFksIFdIRVRIRVIgSU4gQU4gQUNUSU9OIE9GIENPTlRSQUNULCBUT1JUIE9SIE9USEVSV0lTRSwgQVJJU0lORyBGUk9NLFxuXHRcdE9VVCBPRiBPUiBJTiBDT05ORUNUSU9OIFdJVEggVEhFIFNPRlRXQVJFIE9SIFRIRSBVU0UgT1IgT1RIRVIgREVBTElOR1MgSU4gVEhFXG5cdFx0U09GVFdBUkUuXG5cdEBlbmQtbW9kdWxlLWxpY2Vuc2VcblxuXHRAbW9kdWxlLWNvbmZpZ3VyYXRpb246XG5cdFx0e1xuXHRcdFx0XCJwYWNrYWdlXCI6IFwiY2xhem9mXCIsXG5cdFx0XHRcInBhdGhcIjogXCJjbGF6b2YvY2xhem9mLmpzXCIsXG5cdFx0XHRcImZpbGVcIjogXCJjbGF6b2YuanNcIixcblx0XHRcdFwibW9kdWxlXCI6IFwiY2xhem9mXCIsXG5cdFx0XHRcImF1dGhvclwiOiBcIlJpY2hldmUgUy4gQmViZWRvclwiLFxuXHRcdFx0XCJjb250cmlidXRvcnNcIjogW1xuXHRcdFx0XHRcIkpvaG4gTGVub24gTWFnaGFub3kgPGpvaG5sZW5vbm1hZ2hhbm95QGdtYWlsLmNvbT5cIlxuXHRcdFx0XSxcblx0XHRcdFwiZU1haWxcIjogXCJyaWNoZXZlLmJlYmVkb3JAZ21haWwuY29tXCIsXG5cdFx0XHRcInJlcG9zaXRvcnlcIjogXCJodHRwczovL2dpdGh1Yi5jb20vdm9sa292YXN5c3RlbXMvY2xhem9mLmdpdFwiLFxuXHRcdFx0XCJ0ZXN0XCI6IFwiY2xhem9mLXRlc3QuanNcIixcblx0XHRcdFwiZ2xvYmFsXCI6IHRydWVcblx0XHR9XG5cdEBlbmQtbW9kdWxlLWNvbmZpZ3VyYXRpb25cblxuXHRAbW9kdWxlLWRvY3VtZW50YXRpb246XG5cdFx0RnVuY3Rpb25hbCBpbnN0YW5jZW9mLlxuXG5cdFx0VGhpcyB3aWxsIHdhbGsgdGhlIGluaGVyaXRhbmNlIHRyZWUuXG5cdEBlbmQtbW9kdWxlLWRvY3VtZW50YXRpb25cblxuXHRAaW5jbHVkZTpcblx0XHR7XG5cdFx0XHRcImJ1ZGdlXCI6IFwiYnVkZ2VcIixcblx0XHRcdFwiZWVuXCI6IFwiZWVuXCIsXG5cdFx0XHRcImZhbHp5XCI6IFwiZmFsenlcIixcblx0XHRcdFwicHJvdHlwZVwiOiBcInByb3R5cGVcIlxuXHRcdH1cblx0QGVuZC1pbmNsdWRlXG4qL1xuXG5jb25zdCBidWRnZSA9IHJlcXVpcmUoIFwiYnVkZ2VcIiApO1xuY29uc3QgZWVuID0gcmVxdWlyZSggXCJlZW5cIiApO1xuY29uc3QgZmFsenkgPSByZXF1aXJlKCBcImZhbHp5XCIgKTtcbmNvbnN0IHByb3R5cGUgPSByZXF1aXJlKCBcInByb3R5cGVcIiApO1xuXG5jb25zdCBjbGF6b2YgPSBmdW5jdGlvbiBjbGF6b2YoIGVudGl0eSwgYmx1ZXByaW50ICl7XG5cdC8qO1xuXHRcdEBtZXRhLWNvbmZpZ3VyYXRpb246XG5cdFx0XHR7XG5cdFx0XHRcdFwiZW50aXR5OnJlcXVpcmVkXCI6IFwib2JqZWN0XCIsXG5cdFx0XHRcdFwiYmx1ZXByaW50OnJlcXVpcmVkXCI6IFwiZnVuY3Rpb25cIlxuXHRcdFx0fVxuXHRcdEBlbmQtbWV0YS1jb25maWd1cmF0aW9uXG5cdCovXG5cblx0aWYoIGFyZ3VtZW50cy5sZW5ndGggPiAyICl7XG5cdFx0Ymx1ZXByaW50ID0gYnVkZ2UoIGFyZ3VtZW50cyApXG5cdFx0XHQuZmlsdGVyKCAoIGJsdWVwcmludCApID0+IHsgcmV0dXJuIHByb3R5cGUoIGJsdWVwcmludCwgRlVOQ1RJT04gKTsgfSApO1xuXG5cdFx0cmV0dXJuIGJsdWVwcmludC5zb21lKCAoIGJsdWVwcmludCApID0+IHsgcmV0dXJuIGNsYXpvZiggZW50aXR5LCBibHVlcHJpbnQgKTsgfSApO1xuXHR9XG5cblx0aWYoICFwcm90eXBlKCBibHVlcHJpbnQsIEZVTkNUSU9OICkgKXtcblx0XHR0aHJvdyBuZXcgRXJyb3IoIFwiaW52YWxpZCBibHVlcHJpbnRcIiApO1xuXHR9XG5cblx0aWYoIGZhbHp5KCBlbnRpdHkgKSB8fCAhcHJvdHlwZSggZW50aXR5LCBPQkpFQ1QgKyBGVU5DVElPTiApICl7XG5cdFx0cmV0dXJuIGZhbHNlO1xuXHR9XG5cblx0aWYoIHByb3R5cGUoIGVudGl0eSwgT0JKRUNUICkgKXtcblx0XHRsZXQgcmVzdWx0ID0gZW50aXR5IGluc3RhbmNlb2YgYmx1ZXByaW50O1xuXG5cdFx0Lyo7XG5cdFx0XHRAdG9kbzpcblx0XHRcdFx0SWYgd2UgY2FuIHNlcGFyYXRlIHRoaXMgdG8gYW5vdGhlciBtb2R1bGUgdGhhdCBqdXN0IHdhbGsgdGhlIGluaGVyaXRhbmNlIHRyZWUuXG5cdFx0XHRAZW5kLXRvZG9cblx0XHQqL1xuXHRcdGlmKCAhcmVzdWx0ICl7XG5cdFx0XHRsZXQgY29uc3RydWN0b3IgPSBbIF07XG5cdFx0XHRsZXQgcG9pbnQgPSBlbnRpdHk7XG5cdFx0XHR3aGlsZSggZWVuKCBjb25zdHJ1Y3RvciwgcG9pbnQuY29uc3RydWN0b3IgKSApe1xuXHRcdFx0XHRjb25zdHJ1Y3Rvci5wdXNoKCBwb2ludC5jb25zdHJ1Y3RvciApO1xuXHRcdFx0XHRwb2ludCA9IHBvaW50LmNvbnN0cnVjdG9yLnByb3RvdHlwZTtcblx0XHRcdH1cblxuXHRcdFx0cmVzdWx0ID0gY29uc3RydWN0b3Iuc29tZSggKCBjb25zdHJ1Y3RvciApID0+IHtcblx0XHRcdFx0cmV0dXJuIGNsYXpvZiggY29uc3RydWN0b3IsIGJsdWVwcmludCApO1xuXHRcdFx0fSApO1xuXHRcdH1cblxuXHRcdGlmKCAhcmVzdWx0ICl7XG5cdFx0XHRsZXQgY29uc3RydWN0b3IgPSBbIF07XG5cdFx0XHRsZXQgcG9pbnQgPSBlbnRpdHkuY29uc3RydWN0b3I7XG5cdFx0XHR3aGlsZSggZWVuKCBjb25zdHJ1Y3RvciwgcG9pbnQuX19wcm90b19fICkgKXtcblx0XHRcdFx0Y29uc3RydWN0b3IucHVzaCggcG9pbnQuX19wcm90b19fICk7XG5cdFx0XHRcdHBvaW50ID0gcG9pbnQuX19wcm90b19fO1xuXHRcdFx0fVxuXG5cdFx0XHRyZXN1bHQgPSBjb25zdHJ1Y3Rvci5zb21lKCAoIGNvbnN0cnVjdG9yICkgPT4ge1xuXHRcdFx0XHRyZXR1cm4gY2xhem9mKCBjb25zdHJ1Y3RvciwgYmx1ZXByaW50ICk7XG5cdFx0XHR9ICk7XG5cdFx0fVxuXG5cdFx0cmV0dXJuIHJlc3VsdDtcblx0fVxuXG5cdGlmKCBwcm90eXBlKCBlbnRpdHksIEZVTkNUSU9OICkgKXtcblx0XHRyZXR1cm4gKCBlbnRpdHkubmFtZSA9PT0gYmx1ZXByaW50Lm5hbWUgJiZcblx0XHRcdFx0ZW50aXR5LnRvU3RyaW5nKCApID09PSBibHVlcHJpbnQudG9TdHJpbmcoICkgKSB8fFxuXHRcdFx0Y2xhem9mKCBlbnRpdHkucHJvdG90eXBlLCBibHVlcHJpbnQgKTtcblx0fVxufTtcblxubW9kdWxlLmV4cG9ydHMgPSBjbGF6b2Y7XG4iXX0=
+
+//# sourceMappingURL=clazof.support.js.map

@@ -1,9 +1,9 @@
 yarn add \
 babel-runtime \
-budge \
-een \
 falzy \
 protype \
+raze \
+wauker \
 --save && \
 yarn add \
 babel-cli \
@@ -14,8 +14,9 @@ source-map-loader \
 webpack \
 --dev && \
 bower install \
-budge \
-een \
 falzy \
 protype \
---save
+raze \
+wauker \
+--save \
+--force-latest

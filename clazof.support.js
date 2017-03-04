@@ -58,6 +58,7 @@
               			"falzy": "falzy",
               			"protype": "protype",
               			"raze": "raze",
+              			"stringe": "stringe",
               			'wauker': "wauker"
               		}
               	@end-include
@@ -66,6 +67,7 @@
 var falzy = require("falzy");
 var protype = require("protype");
 var raze = require("raze");
+var stringe = require("stringe");
 var wauker = require("wauker");
 
 var clazof = function clazof(entity, blueprint) {
@@ -115,7 +117,7 @@ var clazof = function clazof(entity, blueprint) {
 
 	if (protype(entity, FUNCTION)) {
 		return entity.name === blueprint.name &&
-		entity.toString() === blueprint.toString() ||
+		stringe(entity) === stringe(blueprint) ||
 		clazof(entity.prototype, blueprint);
 	}
 

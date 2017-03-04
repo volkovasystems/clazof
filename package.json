@@ -1,6 +1,6 @@
 {
   "name": "clazof",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "Functional instanceof.",
   "main": "clazof.js",
   "support": "clazof.support.js",
@@ -32,10 +32,11 @@
   "homepage": "https://github.com/volkovasystems/clazof#readme",
   "dependencies": {
     "babel-runtime": "^6.23.0",
-    "falzy": "^0.13.0",
-    "protype": "^0.17.0",
-    "raze": "^0.19.0",
-    "wauker": "^0.1.0"
+    "falzy": "^0.14.0",
+    "protype": "^0.18.0",
+    "raze": "^0.20.0",
+    "stringe": "^0.0.0",
+    "wauker": "^0.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",

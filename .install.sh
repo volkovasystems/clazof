@@ -3,6 +3,7 @@ babel-runtime \
 falzy \
 protype \
 raze \
+stringe \
 wauker \
 --save && \
 yarn add \
@@ -17,6 +18,7 @@ bower install \
 falzy \
 protype \
 raze \
+stringe \
 wauker \
 --save \
 --force-latest

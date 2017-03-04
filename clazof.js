@@ -58,6 +58,7 @@
 			"falzy": "falzy",
 			"protype": "protype",
 			"raze": "raze",
+			"stringe": "stringe",
 			'wauker': "wauker"
 		}
 	@end-include
@@ -66,6 +67,7 @@
 const falzy = require( "falzy" );
 const protype = require( "protype" );
 const raze = require( "raze" );
+const stringe = require( "stringe" );
 const wauker = require( "wauker" );
 
 const clazof = function clazof( entity, blueprint ){
@@ -115,7 +117,7 @@ const clazof = function clazof( entity, blueprint ){
 
 	if( protype( entity, FUNCTION ) ){
 		return ( entity.name === blueprint.name &&
-				entity.toString( ) === blueprint.toString( ) ) ||
+				stringe( entity ) === stringe( blueprint ) ) ||
 			clazof( entity.prototype, blueprint );
 	}
 

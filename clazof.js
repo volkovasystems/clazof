@@ -56,6 +56,7 @@
 	@include:
 		{
 			"falzy": "falzy",
+			"portel": "portel",
 			"protype": "protype",
 			"raze": "raze",
 			"stringe": "stringe",
@@ -65,6 +66,7 @@
 */
 
 const falzy = require( "falzy" );
+const portel = require( "portel" );
 const protype = require( "protype" );
 const raze = require( "raze" );
 const stringe = require( "stringe" );
@@ -99,7 +101,7 @@ const clazof = function clazof( entity, blueprint ){
 	}
 
 	if( falzy( entity ) || !protype( entity, OBJECT + FUNCTION ) ){
-		return false;
+		entity = portel( entity );
 	}
 
 	if( protype( blueprint, STRING ) ){
@@ -110,15 +112,16 @@ const clazof = function clazof( entity, blueprint ){
 
 	if( protype( entity, OBJECT ) ){
 	 	return ( entity instanceof blueprint ) ||
-			wauker( entity ).some( ( constructor ) => {
-				return clazof( constructor, blueprint );
-			} );
+				wauker( entity ).some( ( constructor ) => {
+					return clazof( constructor, blueprint );
+				} ) ||
+				clazof( entity, blueprint.name );
 	}
 
 	if( protype( entity, FUNCTION ) ){
-		return ( entity.name === blueprint.name &&
-				stringe( entity ) === stringe( blueprint ) ) ||
-			clazof( entity.prototype, blueprint );
+		return ( entity.name === blueprint.name && stringe( entity ) === stringe( blueprint ) ) ||
+				clazof( entity.prototype, blueprint ) ||
+				clazof( entity.prototype, blueprint.name );
 	}
 
 	return false;

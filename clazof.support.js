@@ -56,6 +56,7 @@
               	@include:
               		{
               			"falzy": "falzy",
+              			"portel": "portel",
               			"protype": "protype",
               			"raze": "raze",
               			"stringe": "stringe",
@@ -65,6 +66,7 @@
               */
 
 var falzy = require("falzy");
+var portel = require("portel");
 var protype = require("protype");
 var raze = require("raze");
 var stringe = require("stringe");
@@ -99,7 +101,7 @@ var clazof = function clazof(entity, blueprint) {
 	}
 
 	if (falzy(entity) || !protype(entity, OBJECT + FUNCTION)) {
-		return false;
+		entity = portel(entity);
 	}
 
 	if (protype(blueprint, STRING)) {
@@ -112,13 +114,14 @@ var clazof = function clazof(entity, blueprint) {
 		return entity instanceof blueprint ||
 		wauker(entity).some(function (constructor) {
 			return clazof(constructor, blueprint);
-		});
+		}) ||
+		clazof(entity, blueprint.name);
 	}
 
 	if (protype(entity, FUNCTION)) {
-		return entity.name === blueprint.name &&
-		stringe(entity) === stringe(blueprint) ||
-		clazof(entity.prototype, blueprint);
+		return entity.name === blueprint.name && stringe(entity) === stringe(blueprint) ||
+		clazof(entity.prototype, blueprint) ||
+		clazof(entity.prototype, blueprint.name);
 	}
 
 	return false;

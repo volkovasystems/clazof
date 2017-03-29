@@ -1,6 +1,6 @@
 {
   "name": "clazof",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "description": "Functional instanceof.",
   "main": "clazof.deploy.js",
   "support": "clazof.support.js",
@@ -28,8 +28,8 @@
     "falzy": "^0.17.0",
     "portel": "^0.3.0",
     "protype": "^0.21.0",
-    "raze": "^0.24.0",
-    "stringe": "^0.1.0",
-    "wauker": "^0.6.0"
+    "raze": "^0.25.0",
+    "stringe": "^0.2.0",
+    "wauker": "^0.7.0"
   }
 }

@@ -1030,15 +1030,15 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-een@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/een/-/een-0.13.0.tgz#93b1b7db3973c2c544591e35c611923e83375347"
+een@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/een/-/een-0.16.0.tgz#2f115d2f1377e18327f897386cd447e7d2cb7de2"
   dependencies:
     babel-runtime "^6.23.0"
     doubt "^0.24.0"
-    kein "^0.16.0"
+    eqe "^0.0.0"
     protype "^0.21.0"
-    stringe "^0.2.0"
+    raze "^0.25.0"
     truly "^0.17.0"
 
 elliptic@^6.0.0:
@@ -1065,6 +1065,15 @@ enhanced-resolve@^3.0.0:
     memory-fs "^0.4.0"
     object-assign "^4.0.1"
     tapable "^0.2.5"
+
+eqe@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/eqe/-/eqe-0.0.0.tgz#320d21897a2cd4d870adc9f30a9fb4de2fe82a8d"
+  dependencies:
+    babel-runtime "^6.23.0"
+    nafe "^0.0.0"
+    protype "^0.21.0"
+    stringe "^0.2.0"
 
 errno@^0.1.3:
   version "0.1.4"
@@ -1682,6 +1691,15 @@ minimist@^1.2.0:
 ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
+
+nafe@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/nafe/-/nafe-0.0.0.tgz#ac3e9faf6bcdbd7613d6cb2faebb01e831d3dc4a"
+  dependencies:
+    babel-runtime "^6.23.0"
+    falzy "^0.17.0"
+    protype "^0.21.0"
+    stringe "^0.2.0"
 
 nan@^2.3.0:
   version "2.6.1"
@@ -2455,12 +2473,12 @@ watchpack@^1.3.1:
     chokidar "^1.4.3"
     graceful-fs "^4.1.2"
 
-wauker@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/wauker/-/wauker-0.7.0.tgz#70cea7f4d191978b664249b21ca10bebfdfdf80b"
+wauker@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/wauker/-/wauker-0.8.0.tgz#78ba627e2a0fa9fe91b3e45b5ee1815994d5e9d5"
   dependencies:
     babel-runtime "^6.23.0"
-    een "^0.13.0"
+    een "^0.16.0"
     falzy "^0.17.0"
     protease "^0.15.0"
     protype "^0.21.0"

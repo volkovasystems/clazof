@@ -1,6 +1,6 @@
 {
   "name": "clazof",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "description": "Functional instanceof.",
   "main": "clazof.js",
   "support": "clazof.support.js",
@@ -37,7 +37,7 @@
     "protype": "^0.21.0",
     "raze": "^0.25.0",
     "stringe": "^0.2.0",
-    "wauker": "^0.7.0"
+    "wauker": "^0.8.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

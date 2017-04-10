@@ -25,3 +25,5 @@ console.log( "boolean", clazof( true, Boolean ) );
 console.log( "number", clazof( 123, Number ) );
 
 console.log( "string", clazof( "yeah", String ) );
+
+console.log( clazof( function Hello( ){ }, function Hello( ){ } ) );

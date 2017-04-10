@@ -91,9 +91,9 @@ const clazof = function clazof( entity, blueprint ){
 
 	if( arguments.length > 2 ){
 		blueprint = raze( arguments ).splice( 1 )
-			.filter( ( blueprint ) => { return protype( blueprint, FUNCTION + STRING ); } );
+			.filter( ( blueprint ) => protype( blueprint, FUNCTION + STRING ) );
 
-		return blueprint.every( ( blueprint ) => { return clazof( entity, blueprint ); } );
+		return blueprint.every( ( blueprint ) => clazof( entity, blueprint ) );
 	}
 
 	if( !protype( blueprint, FUNCTION + STRING ) ){
@@ -105,23 +105,18 @@ const clazof = function clazof( entity, blueprint ){
 	}
 
 	if( protype( blueprint, STRING ) ){
-		return wauker( entity ).some( ( constructor ) => {
-			return constructor.name === blueprint;
-		} );
+		return wauker( entity ).some( ( constructor ) => ( constructor.name === blueprint ) );
 	}
 
 	if( protype( entity, OBJECT ) ){
 	 	return ( entity instanceof blueprint ) ||
-				wauker( entity ).some( ( constructor ) => {
-					return clazof( constructor, blueprint );
-				} ) ||
+				wauker( entity ).some( ( constructor ) => clazof( constructor, blueprint ) ) ||
 				clazof( entity, blueprint.name );
 	}
 
 	if( protype( entity, FUNCTION ) ){
 		return ( entity.name === blueprint.name && stringe( entity ) === stringe( blueprint ) ) ||
-				clazof( entity.prototype, blueprint ) ||
-				clazof( entity.prototype, blueprint.name );
+				clazof( entity.prototype, blueprint ) || clazof( entity.prototype, blueprint.name );
 	}
 
 	return false;

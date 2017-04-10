@@ -105,23 +105,18 @@ var clazof = function clazof(entity, blueprint) {
 	}
 
 	if (protype(blueprint, STRING)) {
-		return wauker(entity).some(function (constructor) {
-			return constructor.name === blueprint;
-		});
+		return wauker(entity).some(function (constructor) {return constructor.name === blueprint;});
 	}
 
 	if (protype(entity, OBJECT)) {
 		return entity instanceof blueprint ||
-		wauker(entity).some(function (constructor) {
-			return clazof(constructor, blueprint);
-		}) ||
+		wauker(entity).some(function (constructor) {return clazof(constructor, blueprint);}) ||
 		clazof(entity, blueprint.name);
 	}
 
 	if (protype(entity, FUNCTION)) {
 		return entity.name === blueprint.name && stringe(entity) === stringe(blueprint) ||
-		clazof(entity.prototype, blueprint) ||
-		clazof(entity.prototype, blueprint.name);
+		clazof(entity.prototype, blueprint) || clazof(entity.prototype, blueprint.name);
 	}
 
 	return false;

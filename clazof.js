@@ -56,6 +56,7 @@
 	@include:
 		{
 			"falzy": "falzy",
+			"fname": "fname",
 			"portel": "portel",
 			"protype": "protype",
 			"raze": "raze",
@@ -66,6 +67,7 @@
 */
 
 const falzy = require( "falzy" );
+const fname = require( "fname" );
 const portel = require( "portel" );
 const protype = require( "protype" );
 const raze = require( "raze" );
@@ -78,7 +80,8 @@ const clazof = function clazof( entity, blueprint ){
 			{
 				"entity:required": [
 					"object",
-					"function"
+					"function",
+					"*"
 				],
 				"blueprint:required": [
 					"function",
@@ -90,10 +93,9 @@ const clazof = function clazof( entity, blueprint ){
 	*/
 
 	if( arguments.length > 2 ){
-		blueprint = raze( arguments ).splice( 1 )
-			.filter( ( blueprint ) => protype( blueprint, FUNCTION + STRING ) );
-
-		return blueprint.every( ( blueprint ) => clazof( entity, blueprint ) );
+		return raze( arguments ).splice( 1 )
+			.filter( ( blueprint ) => protype( blueprint, FUNCTION + STRING ) )
+			.every( ( blueprint ) => clazof( entity, blueprint ) );
 	}
 
 	if( !protype( blueprint, FUNCTION + STRING ) ){
@@ -104,22 +106,18 @@ const clazof = function clazof( entity, blueprint ){
 		entity = portel( entity );
 	}
 
-	if( protype( blueprint, STRING ) ){
-		return wauker( entity ).some( ( constructor ) => ( constructor.name === blueprint ) );
+	if( protype( entity, OBJECT ) &&
+		protype( blueprint, FUNCTION ) &&
+		entity instanceof blueprint )
+	{
+		return true;
 	}
 
-	if( protype( entity, OBJECT ) ){
-	 	return ( entity instanceof blueprint ) ||
-				wauker( entity ).some( ( constructor ) => clazof( constructor, blueprint ) ) ||
-				clazof( entity, blueprint.name );
-	}
-
-	if( protype( entity, FUNCTION ) ){
-		return ( entity.name === blueprint.name && stringe( entity ) === stringe( blueprint ) ) ||
-				clazof( entity.prototype, blueprint ) || clazof( entity.prototype, blueprint.name );
-	}
-
-	return false;
+	return wauker( entity ).concat( [ Function, Object ] )
+		.some( ( constructor ) => {
+			return ( fname( constructor ) == fname( blueprint ) ||
+				stringe( constructor ) == stringe( blueprint ) );
+		} );
 };
 
 module.exports = clazof;

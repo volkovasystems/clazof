@@ -56,6 +56,7 @@
               	@include:
               		{
               			"falzy": "falzy",
+              			"fname": "fname",
               			"portel": "portel",
               			"protype": "protype",
               			"raze": "raze",
@@ -66,6 +67,7 @@
               */
 
 var falzy = require("falzy");
+var fname = require("fname");
 var portel = require("portel");
 var protype = require("protype");
 var raze = require("raze");
@@ -78,7 +80,8 @@ var clazof = function clazof(entity, blueprint) {
                                                  		{
                                                  			"entity:required": [
                                                  				"object",
-                                                 				"function"
+                                                 				"function",
+                                                 				"*"
                                                  			],
                                                  			"blueprint:required": [
                                                  				"function",
@@ -90,10 +93,9 @@ var clazof = function clazof(entity, blueprint) {
                                                  */
 
 	if (arguments.length > 2) {
-		blueprint = raze(arguments).splice(1).
-		filter(function (blueprint) {return protype(blueprint, FUNCTION + STRING);});
-
-		return blueprint.every(function (blueprint) {return clazof(entity, blueprint);});
+		return raze(arguments).splice(1).
+		filter(function (blueprint) {return protype(blueprint, FUNCTION + STRING);}).
+		every(function (blueprint) {return clazof(entity, blueprint);});
 	}
 
 	if (!protype(blueprint, FUNCTION + STRING)) {
@@ -104,22 +106,18 @@ var clazof = function clazof(entity, blueprint) {
 		entity = portel(entity);
 	}
 
-	if (protype(blueprint, STRING)) {
-		return wauker(entity).some(function (constructor) {return constructor.name === blueprint;});
+	if (protype(entity, OBJECT) &&
+	protype(blueprint, FUNCTION) &&
+	entity instanceof blueprint)
+	{
+		return true;
 	}
 
-	if (protype(entity, OBJECT)) {
-		return entity instanceof blueprint ||
-		wauker(entity).some(function (constructor) {return clazof(constructor, blueprint);}) ||
-		clazof(entity, blueprint.name);
-	}
-
-	if (protype(entity, FUNCTION)) {
-		return entity.name === blueprint.name && stringe(entity) === stringe(blueprint) ||
-		clazof(entity.prototype, blueprint) || clazof(entity.prototype, blueprint.name);
-	}
-
-	return false;
+	return wauker(entity).concat([Function, Object]).
+	some(function (constructor) {
+		return fname(constructor) == fname(blueprint) ||
+		stringe(constructor) == stringe(blueprint);
+	});
 };
 
 module.exports = clazof;

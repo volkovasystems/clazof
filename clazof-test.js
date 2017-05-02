@@ -1,29 +1,22 @@
 "use strict";
 
+const assert = require( "assert" );
 const clazof = require( "./clazof.js" );
 
-console.log( clazof( new Date( ), Date ) );
+assert.equal( clazof( new Date( ), Date ), true, "should be true" );
 
-console.log( clazof( Array, Array ) );
+assert.equal( clazof( Array, Array ), true, "should be true" );
 
-console.log( clazof( Array, Object ) );
+assert.equal( clazof( Array, Object ), true, "should be true" );
 
-console.log( clazof( RangeError, Array ) );
+assert.equal( clazof( Array, "Array" ), true, "should be true" );
 
-console.log( clazof( RangeError, "Error" ) );
+assert.equal( clazof( true, Boolean ), true, "should be true" );
 
-console.log( clazof( RangeError, "RangeError" ) );
+assert.equal( clazof( 123, Number ), true, "should be true" );
 
-console.log( clazof( RangeError, "Array" ) );
+assert.equal( clazof( "yeah", String ), true, "should be true" );
 
-console.log( clazof( Array, "Array" ) );
+assert.equal( clazof( function Hello( ){ }, function Hello( ){ } ), true, "should be true" );
 
-console.log( clazof( RangeError, Error, Array ) );
-
-console.log( "boolean", clazof( true, Boolean ) );
-
-console.log( "number", clazof( 123, Number ) );
-
-console.log( "string", clazof( "yeah", String ) );
-
-console.log( clazof( function Hello( ){ }, function Hello( ){ } ) );
+console.log( "ok" );

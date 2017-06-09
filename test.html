@@ -1,8 +1,59 @@
+<!DOCTYPE html>
 <html>
-	<head>
-		<script
-			type="application/javascript"
-			src="./clazof.deploy.js">
-		</script>
-	</head>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Clazof QUnit Example</title>
+	<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.3.2.css">
+	<script src="https://code.jquery.com/qunit/qunit-2.3.2.js"></script>
+	<script type="application/javascript" src="./clazof.deploy.js"></script>
+</head>
+
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+	<script>
+		QUnit.test("equal test", function (assert) {
+			assert.equal(clazof(new Date(), Date), true, "should be true");
+
+			assert.equal(clazof(Array, Array), true, "should be true");
+
+			assert.equal(clazof(Array, Object), true, "should be true");
+
+			assert.equal(clazof(Date, Object), true, "should be true");
+
+			assert.equal(clazof(RegExp, Object), true, "should be true");
+
+			assert.equal(clazof(Array, Function), true, "should be true");
+
+			assert.equal(clazof(Date, Function), true, "should be true");
+
+			assert.equal(clazof(RegExp, Function), true, "should be true");
+
+			assert.equal(clazof(Array, "Array"), true, "should be true");
+
+			assert.equal(clazof(true, Boolean), true, "should be true");
+
+			assert.equal(clazof(123, Number), true, "should be true");
+
+			assert.equal(clazof("yeah", String), true, "should be true");
+
+			assert.equal(clazof(123 + "a", String), true, "should be true");
+
+			assert.equal(clazof([], Array), true, "should be true");
+
+			assert.equal(clazof({}, Object), true, "should be true");
+
+			assert.equal(clazof([], Object), true, "should be true");
+
+			assert.equal(clazof(function Hello() { }, function Hello() { }), true, "should be true");
+
+			assert.equal(clazof(function Hello() { }, function Hi() { }), false, "should return false");
+
+			assert.equal(clazof(123 + "a", Number), false, "should return false");
+		});
+	</script>
+</body>
+
 </html>

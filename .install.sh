@@ -1,5 +1,6 @@
 yarn add \
 babel-runtime \
+annon \
 falzy \
 fname \
 portel \
@@ -17,6 +18,7 @@ source-map-loader \
 webpack \
 --dev && \
 bower install \
+annon \
 falzy \
 fname \
 portel \

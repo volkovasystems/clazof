@@ -1,49 +1,54 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>clazof unit test</title>
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>Clazof QUnit Test</title>
-	<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.3.2.css">
-	<script src="https://code.jquery.com/qunit/qunit-2.3.2.js"></script>
-	<script type="application/javascript" src="./clazof.deploy.js"></script>
-</head>
+		<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.3.2.css">
 
-<body>
-	<div id="qunit"></div>
-	<div id="qunit-fixture"></div>
-	<script>
-		QUnit.test( "equal test", function( assert ) {
+		<script type="application/javascript" src="https://code.jquery.com/qunit/qunit-2.3.2.js"></script>
 
-			assert.equal( clazof( new Date( ), Date ), true, "should be true" );
+		<script type="application/javascript" src="./clazof.deploy.js"></script>
+	</head>
 
-			assert.equal( clazof( Array, Array ), true, "should be true" );
+	<body>
+		<div id="qunit"></div>
 
-			assert.equal( clazof( Array, Object ), true, "should be true" );
+		<div id="qunit-fixture"></div>
 
-			assert.equal( clazof( Array, Function ), true, "should be true" );
+		<script type="application/javascript">
+			QUnit.test( "clazof unit test", function( assert ) {
 
-			assert.equal( clazof( Array, "Array" ), true, "should be true" );
+				assert.equal( clazof( new Date( ), Date ), true, "should be true" );
 
-			assert.equal( clazof( true, Boolean ), true, "should be true" );
+				assert.equal( clazof( Array, Array ), true, "should be true" );
 
-			assert.equal( clazof( 123, Number ), true, "should be true" );
+				assert.equal( clazof( Array, Object ), true, "should be true" );
 
-			assert.equal( clazof( "yeah", String ), true, "should be true" );
+				assert.equal( clazof( Array, Function ), true, "should be true" );
 
-			assert.equal( clazof( [ ], Array ), true, "should be true" );
+				assert.equal( clazof( Array, "Array" ), true, "should be true" );
 
-			assert.equal( clazof( { }, Object ), true, "should be true" );
+				assert.equal( clazof( true, Boolean ), true, "should be true" );
 
-			assert.equal( clazof( [ ], Object ), true, "should be true" );
+				assert.equal( clazof( 123, Number ), true, "should be true" );
 
-			assert.equal( clazof( function Hello( ){ }, function Hello( ){ } ), true, "should be true" );
+				assert.equal( clazof( "yeah", String ), true, "should be true" );
 
-			assert.equal( clazof( function Hello( ){ }, function Hi( ){ } ), false, "should return false" );
+				assert.equal( clazof( [ ], Array ), true, "should be true" );
 
-		} );
-	</script>
-</body>
+				assert.equal( clazof( { }, Object ), true, "should be true" );
 
+				assert.equal( clazof( [ ], Object ), true, "should be true" );
+
+				assert.equal( clazof( function Hello( ){ }, function Hello( ){ } ), true, "should be true" );
+
+				assert.equal( clazof( function Hello( ){ }, function Hi( ){ } ), false, "should return false" );
+
+				assert.equal( clazof( function( ){ }, function Hi( ){ } ), false, "should return false" );
+
+				assert.equal( clazof( ( ) => { }, ( ) => { } ), false, "should return false" );
+				
+			} );
+		</script>
+	</body>
 </html>

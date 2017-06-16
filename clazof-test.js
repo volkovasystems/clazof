@@ -28,4 +28,8 @@ assert.equal( clazof( function Hello( ){ }, function Hello( ){ } ), true, "shoul
 
 assert.equal( clazof( function Hello( ){ }, function Hi( ){ } ), false, "should return false" );
 
+assert.equal( clazof( function( ){ }, function Hi( ){ } ), false, "should return false" );
+
+assert.equal( clazof( ( ) => { }, ( ) => { } ), false, "should return false" );
+
 console.log( "ok" );

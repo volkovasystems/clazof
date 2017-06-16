@@ -35,7 +35,8 @@
 			"module": "clazof",
 			"author": "Richeve S. Bebedor",
 			"contributors": [
-				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>",
+				"Vinse Vinalon <vinsevinalon@gmail.com>"
 			],
 			"eMail": "richeve.bebedor@gmail.com",
 			"repository": "https://github.com/volkovasystems/clazof.git",
@@ -55,6 +56,7 @@
 
 	@include:
 		{
+			"annon": "annon",
 			"falzy": "falzy",
 			"fname": "fname",
 			"portel": "portel",
@@ -66,6 +68,7 @@
 	@end-include
 */
 
+const annon = require( "annon" );
 const falzy = require( "falzy" );
 const fname = require( "fname" );
 const portel = require( "portel" );
@@ -111,6 +114,13 @@ const clazof = function clazof( entity, blueprint ){
 		entity instanceof blueprint )
 	{
 		return true;
+	}
+
+	if( protype( entity, FUNCTION ) &&
+		protype( blueprint, FUNCTION ) &&
+		( annon( entity ) || annon( blueprint ) ) )
+	{
+		return false;
 	}
 
 	return wauker( entity ).concat( [ Function, Object ] )

@@ -34,11 +34,11 @@
               			"file": "clazof.js",
               			"module": "clazof",
               			"author": "Richeve S. Bebedor",
+              			"eMail": "richeve.bebedor@gmail.com",
               			"contributors": [
               				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>",
               				"Vinse Vinalon <vinsevinalon@gmail.com>"
               			],
-              			"eMail": "richeve.bebedor@gmail.com",
               			"repository": "https://github.com/volkovasystems/clazof.git",
               			"test": "clazof-test.js",
               			"global": true
@@ -66,7 +66,7 @@
               			'wauker': "wauker"
               		}
               	@end-include
-              */
+              */var _typeof2 = require("babel-runtime/helpers/typeof");var _typeof3 = _interopRequireDefault(_typeof2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 var annon = require("annon");
 var falzy = require("falzy");
@@ -109,15 +109,15 @@ var clazof = function clazof(entity, blueprint) {
 		entity = portel(entity);
 	}
 
-	if (protype(entity, OBJECT) &&
-	protype(blueprint, FUNCTION) &&
+	if ((typeof entity === "undefined" ? "undefined" : (0, _typeof3.default)(entity)) == OBJECT &&
+	(typeof blueprint === "undefined" ? "undefined" : (0, _typeof3.default)(blueprint)) == FUNCTION &&
 	entity instanceof blueprint)
 	{
 		return true;
 	}
 
-	if (protype(entity, FUNCTION) &&
-	protype(blueprint, FUNCTION) && (
+	if ((typeof entity === "undefined" ? "undefined" : (0, _typeof3.default)(entity)) == FUNCTION &&
+	(typeof blueprint === "undefined" ? "undefined" : (0, _typeof3.default)(blueprint)) == FUNCTION && (
 	annon(entity) || annon(blueprint)))
 	{
 		return false;

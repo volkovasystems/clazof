@@ -34,11 +34,11 @@
 			"file": "clazof.js",
 			"module": "clazof",
 			"author": "Richeve S. Bebedor",
+			"eMail": "richeve.bebedor@gmail.com",
 			"contributors": [
 				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>",
 				"Vinse Vinalon <vinsevinalon@gmail.com>"
 			],
-			"eMail": "richeve.bebedor@gmail.com",
 			"repository": "https://github.com/volkovasystems/clazof.git",
 			"test": "clazof-test.js",
 			"global": true
@@ -109,15 +109,15 @@ const clazof = function clazof( entity, blueprint ){
 		entity = portel( entity );
 	}
 
-	if( protype( entity, OBJECT ) &&
-		protype( blueprint, FUNCTION ) &&
+	if( typeof entity == OBJECT &&
+		typeof blueprint == FUNCTION &&
 		entity instanceof blueprint )
 	{
 		return true;
 	}
 
-	if( protype( entity, FUNCTION ) &&
-		protype( blueprint, FUNCTION ) &&
+	if( typeof entity == FUNCTION &&
+		typeof blueprint == FUNCTION &&
 		( annon( entity ) || annon( blueprint ) ) )
 	{
 		return false;

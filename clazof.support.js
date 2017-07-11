@@ -62,7 +62,6 @@
               			"portel": "portel",
               			"protype": "protype",
               			"raze": "raze",
-              			"stringe": "stringe",
               			'wauker': "wauker"
               		}
               	@end-include
@@ -74,7 +73,6 @@ var fname = require("fname");
 var portel = require("portel");
 var protype = require("protype");
 var raze = require("raze");
-var stringe = require("stringe");
 var wauker = require("wauker");
 
 var clazof = function clazof(entity, blueprint) {
@@ -126,7 +124,7 @@ var clazof = function clazof(entity, blueprint) {
 	return wauker(entity).concat([Function, Object]).
 	some(function (constructor) {
 		return fname(constructor) == fname(blueprint) ||
-		stringe(constructor) == stringe(blueprint);
+		constructor.toString() == blueprint.toString();
 	});
 };
 

@@ -6,7 +6,6 @@ fname \
 portel \
 protype \
 raze \
-stringe \
 wauker \
 --save && \
 yarn add \
@@ -24,7 +23,6 @@ fname \
 portel \
 protype \
 raze \
-stringe \
 wauker \
 --save \
 --force-latest

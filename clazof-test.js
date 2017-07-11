@@ -18,6 +18,10 @@ assert.equal( clazof( [ ], Array ), true, "should be true" );
 
 assert.equal( clazof( { }, Object ), true, "should be true" );
 
+assert.equal( clazof( null, Object ), true, "should be true" );
+
+assert.equal( clazof( function constructor( ){ }, "constructor" ), true, "should be true" );
+
 assert.equal( clazof( function Hello( ){ }, function Hello( ){ } ), true, "should be true" );
 
 assert.equal( clazof( null, Object ), true, "should be true" );

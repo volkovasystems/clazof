@@ -62,6 +62,7 @@
               			"portel": "portel",
               			"protype": "protype",
               			"raze": "raze",
+              			"stringe": "stringe",
               			'wauker': "wauker"
               		}
               	@end-include
@@ -73,6 +74,7 @@ var fname = require("fname");
 var portel = require("portel");
 var protype = require("protype");
 var raze = require("raze");
+var stringe = require("stringe");
 var wauker = require("wauker");
 
 var clazof = function clazof(entity, blueprint) {
@@ -95,7 +97,7 @@ var clazof = function clazof(entity, blueprint) {
 
 	if (arguments.length > 2) {
 		return raze(arguments).splice(1).
-		filter(function (blueprint) {return protype(blueprint, FUNCTION + STRING);}).
+		filter(function (blueprint) {return protype(blueprint, FUNCTION, STRING);}).
 		every(function (blueprint) {return clazof(entity, blueprint);});
 	}
 
@@ -107,14 +109,16 @@ var clazof = function clazof(entity, blueprint) {
 		entity = portel(entity);
 	}
 
-	if ((typeof entity === "undefined" ? "undefined" : (0, _typeof3.default)(entity)) == OBJECT &&
+	if (
+	(typeof entity === "undefined" ? "undefined" : (0, _typeof3.default)(entity)) == OBJECT &&
 	(typeof blueprint === "undefined" ? "undefined" : (0, _typeof3.default)(blueprint)) == FUNCTION &&
 	entity instanceof blueprint)
 	{
 		return true;
 	}
 
-	if ((typeof entity === "undefined" ? "undefined" : (0, _typeof3.default)(entity)) == FUNCTION &&
+	if (
+	(typeof entity === "undefined" ? "undefined" : (0, _typeof3.default)(entity)) == FUNCTION &&
 	(typeof blueprint === "undefined" ? "undefined" : (0, _typeof3.default)(blueprint)) == FUNCTION && (
 	annon(entity) || annon(blueprint)))
 	{
@@ -123,8 +127,10 @@ var clazof = function clazof(entity, blueprint) {
 
 	return wauker(entity).concat([Function, Object]).
 	some(function (constructor) {
-		return fname(constructor) == fname(blueprint) ||
-		constructor.toString() == blueprint.toString();
+		return (
+			fname(constructor) == fname(blueprint) ||
+			stringe(constructor) == stringe(blueprint));
+
 	});
 };
 

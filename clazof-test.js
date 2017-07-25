@@ -2,31 +2,31 @@
 const assert = require( "assert" );
 const clazof = require( "./clazof.js" );
 
-assert.equal( clazof( new Date( ), Date ), true, "should be true" );
+assert.equal( clazof( new Date( ), Date ), true, "should return true" );
 
-assert.equal( clazof( Array, Array ), true, "should be true" );
+assert.equal( clazof( Array, Array ), true, "should return true" );
 
-assert.equal( clazof( Array, "Array" ), true, "should be true" );
+assert.equal( clazof( Array, "Array" ), true, "should return true" );
 
-assert.equal( clazof( true, Boolean ), true, "should be true" );
+assert.equal( clazof( true, Boolean ), true, "should return true" );
 
-assert.equal( clazof( 123, Number ), true, "should be true" );
+assert.equal( clazof( 123, Number ), true, "should return true" );
 
-assert.equal( clazof( "yeah", String ), true, "should be true" );
+assert.equal( clazof( "yeah", String ), true, "should return true" );
 
-assert.equal( clazof( [ ], Array ), true, "should be true" );
+assert.equal( clazof( [ ], Array ), true, "should return true" );
 
-assert.equal( clazof( { }, Object ), true, "should be true" );
+assert.equal( clazof( [ ], Object ), true, "should return true" );
 
-assert.equal( clazof( null, Object ), true, "should be true" );
+assert.equal( clazof( { }, Object ), true, "should return true" );
 
-assert.equal( clazof( function constructor( ){ }, "constructor" ), true, "should be true" );
+assert.equal( clazof( null, Object ), true, "should return true" );
 
-assert.equal( clazof( function Hello( ){ }, function Hello( ){ } ), true, "should be true" );
+assert.equal( clazof( function constructor( ){ }, "constructor" ), true, "should return true" );
 
-assert.equal( clazof( null, Object ), true, "should be true" );
+assert.equal( clazof( function Hello( ){ }, function Hello( ){ } ), true, "should return true" );
 
-assert.equal( clazof( /eah/, RegExp ), true, "should be true" );
+assert.equal( clazof( /eah/, RegExp ), true, "should return true" );
 
 class Orange {
 	constructor( ){
@@ -50,9 +50,9 @@ class Apple extends Orange {
 
 let apple = new Apple( );
 
-assert.equal( clazof( apple, "Orange" ), true, "should be true" );
+assert.equal( clazof( apple, "Orange" ), true, "should return true" );
 
-assert.equal( clazof( null, Error ), false, "should be false" );
+assert.equal( clazof( null, Error ), false, "should return false" );
 
 assert.equal( clazof( function Hello( ){ }, function Hi( ){ } ), false, "should return false" );
 

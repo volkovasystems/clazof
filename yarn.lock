@@ -52,14 +52,14 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-annon@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/annon/-/annon-0.11.0.tgz#b489bab5dff85d596ded58f580dc8738d3511e12"
+annon@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/annon/-/annon-0.12.0.tgz#a304ab18c2959c0825d14f2d3673e60e64708895"
   dependencies:
-    babel-runtime "^6.23.0"
+    babel-runtime "^6.25.0"
     falzy "^0.23.0"
-    fnamed "^0.13.0"
-    protype "^0.23.0"
+    fnamed "^0.14.0"
+    protype "^0.24.0"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
@@ -1273,14 +1273,14 @@ fname@^0.13.0:
     mtch "^0.6.0"
     nmde "^0.5.0"
 
-fnamed@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/fnamed/-/fnamed-0.13.0.tgz#f938626b38693ec76a234eceac0becd9343e3c3d"
+fnamed@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/fnamed/-/fnamed-0.14.0.tgz#dec9d75a97b406c74a128a6a2642a213422f934b"
   dependencies:
-    babel-runtime "^6.23.0"
+    babel-runtime "^6.25.0"
     falzy "^0.23.0"
     fname "^0.13.0"
-    protype "^0.23.0"
+    protype "^0.24.0"
     truly "^0.20.0"
 
 for-in@^1.0.1:

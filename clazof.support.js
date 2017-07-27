@@ -110,16 +110,16 @@ var clazof = function clazof(entity, blueprint) {
 	}
 
 	if (
-	(typeof entity === "undefined" ? "undefined" : (0, _typeof3.default)(entity)) == OBJECT &&
-	(typeof blueprint === "undefined" ? "undefined" : (0, _typeof3.default)(blueprint)) == FUNCTION &&
+	(typeof entity === "undefined" ? "undefined" : (0, _typeof3.default)(entity)) == "object" &&
+	typeof blueprint == "function" &&
 	entity instanceof blueprint)
 	{
 		return true;
 	}
 
 	if (
-	(typeof entity === "undefined" ? "undefined" : (0, _typeof3.default)(entity)) == FUNCTION &&
-	(typeof blueprint === "undefined" ? "undefined" : (0, _typeof3.default)(blueprint)) == FUNCTION && (
+	typeof entity == "function" &&
+	typeof blueprint == "function" && (
 	annon(entity) || annon(blueprint)))
 	{
 		return false;

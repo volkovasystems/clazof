@@ -110,16 +110,16 @@ const clazof = function clazof( entity, blueprint ){
 	}
 
 	if(
-		typeof entity == OBJECT &&
-		typeof blueprint == FUNCTION &&
+		typeof entity == "object" &&
+		typeof blueprint == "function" &&
 		entity instanceof blueprint
 	){
 		return true;
 	}
 
 	if(
-		typeof entity == FUNCTION &&
-		typeof blueprint == FUNCTION &&
+		typeof entity == "function" &&
+		typeof blueprint == "function" &&
 		( annon( entity ) || annon( blueprint ) )
 	){
 		return false;

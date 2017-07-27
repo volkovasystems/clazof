@@ -625,9 +625,9 @@ babel-register@^6.24.1:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0:
-  version "6.23.0"
-  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
+babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.25.0:
+  version "6.25.0"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.25.0.tgz#33b98eaa5d482bb01a8d1aa6b437ad2b01aec41c"
   dependencies:
     core-js "^2.4.0"
     regenerator-runtime "^0.10.0"
@@ -2134,6 +2134,14 @@ process@^0.11.0:
 protype@^0.23.0:
   version "0.23.0"
   resolved "https://registry.yarnpkg.com/protype/-/protype-0.23.0.tgz#6bf0306520f61efd308f23c9b601408c877d24fa"
+  dependencies:
+    babel-runtime "^6.23.0"
+    cemento "^0.17.0"
+    harden "^0.23.0"
+
+protype@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/protype/-/protype-0.24.0.tgz#e30a9862ac768b66b9d0be57be88a4066a1697f1"
   dependencies:
     babel-runtime "^6.23.0"
     cemento "^0.17.0"

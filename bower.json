@@ -1,6 +1,6 @@
 {
 	"name": "clazof",
-	"version": "0.35.0",
+	"version": "0.36.0",
 	"description": "Functional instanceof.",
 	"main": "clazof.deploy.js",
 	"support": "clazof.support.js",

@@ -1,83 +1,26 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>clazof unit test</title>
+		<meta charset="utf-8">
 
-		<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.3.2.css">
+		<title>test:clazof</title>
 
-		<script type="application/javascript" src="https://code.jquery.com/qunit/qunit-2.3.2.js"></script>
-
-		<script type="application/javascript" src="./clazof.deploy.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css"/>
 	</head>
 
 	<body>
-		<div id="qunit"></div>
+		<div id="mocha"></div>
 
-		<div id="qunit-fixture"></div>
+		<script type="application/javascript" src="https://unpkg.com/mocha/mocha.js"></script>
 
 		<script type="application/javascript">
-			QUnit.test( "clazof unit test", function( assert ) {
+			mocha.setup( "bdd" );
+		</script>
 
-				assert.equal( clazof( new Date( ), Date ), true, "should be equal to true" );
+		<script type="application/javascript" src="./test.deploy.js"></script>
 
-				assert.equal( clazof( Array, Array ), true, "should be equal to true" );
-
-				assert.equal( clazof( Array, "Array" ), true, "should be equal to true" );
-
-				assert.equal( clazof( true, Boolean ), true, "should be equal to true" );
-
-				assert.equal( clazof( 123, Number ), true, "should be equal to true" );
-
-				assert.equal( clazof( "yeah", String ), true, "should be equal to true" );
-
-				assert.equal( clazof( [ ], Array ), true, "should be equal to true" );
-
-				assert.equal( clazof( [ ], Object ), true, "should be equal to true" );
-
-				assert.equal( clazof( { }, Object ), true, "should be equal to true" );
-				/* @note
-						The entity is null leading to "Cannot read property 'constructor' of null"
-				assert.equal( clazof( null, Object ), true, "should be equal to true" );
-				*/
-
-				assert.equal( clazof( function constructor( ){ }, "constructor" ), true, "should be equal to true" );
-
-				assert.equal( clazof( function Hello( ){ }, function Hello( ){ } ), true, "should be equal to true" );
-
-				assert.equal( clazof( /eah/, RegExp ), true, "should be equal to true" );
-
-				class Orange {
-					constructor( ){
-						this.color = "orange";
-					}
-					getColor( ){
-						return "orange";
-					}
-				}
-
-				class Apple extends Orange {
-					constructor( ){
-						super( );
-
-						this.color = "red";
-					}
-					getColor( ){
-						return this.color;
-					}
-				}
-
-				let apple = new Apple( );
-
-				assert.equal( clazof( apple, "Orange" ), true, "should be equal to true" );
-				/* @note
-						The entity is null leading to "Cannot read property 'constructor' of null"
-				assert.equal( clazof( null, Error ), false, "should be equal to false" );
-				*/
-				assert.equal( clazof( function Hello( ){ }, function Hi( ){ } ), false, "should be equal to false" );
-
-				assert.equal( clazof( ( ) => { }, ( ) => { } ), false, "should be equal to false" );
-
-			} );
+		<script type="application/javascript">
+			mocha.run( );
 		</script>
 	</body>
 </html>

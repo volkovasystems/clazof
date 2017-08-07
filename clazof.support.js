@@ -107,6 +107,7 @@ var clazof = function clazof(entity, blueprint) {
 
 	if (falzy(entity) || !protype(entity, OBJECT + FUNCTION)) {
 		entity = portel(entity);
+		console.log("Boolean", entity.instanceOf(blueprint));
 	}
 
 	if (

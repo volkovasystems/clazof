@@ -1,16 +1,15 @@
 
 const assert = require( "assert" );
 const clazof = require( "./clazof.js" );
-/*
+
 assert.equal( clazof( new Date( ), Date ), true, "should be equal to true" );
 
 assert.equal( clazof( Array, Array ), true, "should be equal to true" );
 
 assert.equal( clazof( Array, "Array" ), true, "should be equal to true" );
-*/
+
 assert.equal( clazof( true, Boolean ), true, "should be equal to true" );
 
-/*
 assert.equal( clazof( 123, Number ), true, "should be equal to true" );
 
 assert.equal( clazof( "yeah", String ), true, "should be equal to true" );
@@ -20,7 +19,7 @@ assert.equal( clazof( [ ], Array ), true, "should be equal to true" );
 assert.equal( clazof( [ ], Object ), true, "should be equal to true" );
 
 assert.equal( clazof( { }, Object ), true, "should be equal to true" );
-*/
+
 /* @note
 		The entity is null leading to "Cannot read property 'constructor' of null"
 
@@ -29,7 +28,6 @@ assert.equal( clazof( null, OBJECT ), true, "should be equal to true" );
 
 */
 
-/*
 assert.equal( clazof( function constructor( ){ }, "constructor" ), true, "should be equal to true" );
 
 assert.equal( clazof( function Hello( ){ }, function Hello( ){ } ), true, "should be equal to true" );
@@ -65,4 +63,3 @@ assert.equal( clazof( function Hello( ){ }, function Hi( ){ } ), false, "should 
 assert.equal( clazof( ( ) => { }, ( ) => { } ), false, "should be equal to false" );
 
 console.log( "ok" );
-*/

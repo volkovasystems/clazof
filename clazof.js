@@ -110,17 +110,17 @@ const clazof = function clazof( entity, blueprint ){
 	}
 
 	if(
-		typeof entity == "object" &&
-		typeof blueprint == "function" &&
-		entity instanceof blueprint
+		typeof entity == "object"
+		&& typeof blueprint == "function"
+		&& ( entity instanceof blueprint || entity.instanceOf( blueprint ) )
 	){
 		return true;
 	}
 
 	if(
-		typeof entity == "function" &&
-		typeof blueprint == "function" &&
-		( annon( entity ) || annon( blueprint ) )
+		typeof entity == "function"
+		&& typeof blueprint == "function"
+		&& ( annon( entity ) || annon( blueprint ) )
 	){
 		return false;
 	}

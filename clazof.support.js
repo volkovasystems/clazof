@@ -111,8 +111,8 @@ var clazof = function clazof(entity, blueprint) {
 
 	if (
 	(typeof entity === "undefined" ? "undefined" : (0, _typeof3.default)(entity)) == "object" &&
-	typeof blueprint == "function" &&
-	entity instanceof blueprint)
+	typeof blueprint == "function" && (
+	entity instanceof blueprint || entity.instanceOf(blueprint)))
 	{
 		return true;
 	}

@@ -20,13 +20,9 @@ assert.equal( clazof( [ ], Object ), true, "should be equal to true" );
 
 assert.equal( clazof( { }, Object ), true, "should be equal to true" );
 
-/* @note
-		The entity is null leading to "Cannot read property 'constructor' of null"
-
 assert.equal( clazof( null, Error ), false, "should be equal to false" );
-assert.equal( clazof( null, OBJECT ), true, "should be equal to true" );
 
-*/
+assert.equal( clazof( null, Object ), true, "should be equal to true" );
 
 assert.equal( clazof( function constructor( ){ }, "constructor" ), true, "should be equal to true" );
 

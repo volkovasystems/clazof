@@ -24,18 +24,5 @@
 		"bower_components",
 		"test",
 		"tests"
-	],
-	"resolutions": {
-		"protype": "^0.24.0"
-	},
-	"dependencies": {
-		"annon": "^0.12.0",
-		"falzy": "^0.23.0",
-		"fname": "^0.13.0",
-		"portel": "^0.5.0",
-		"protype": "^0.24.0",
-		"raze": "^0.34.0",
-		"stringe": "^0.5.0",
-		"wauker": "^0.21.0"
-	}
+	]
 }
